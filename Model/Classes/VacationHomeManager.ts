@@ -2,7 +2,7 @@ import { IVacationHome } from "../Interfaces/IVacationHome";
 import { IVacationHomeManager } from "../Interfaces/IVacationHomeManager";
 import { PropertyType } from "../Types";
 
-class VacationHomeManger implements IVacationHomeManager {
+export class VacationHomeManger implements IVacationHomeManager {
 
     beachHouses: IVacationHome[];
     cityApartments: IVacationHome[];
@@ -10,6 +10,7 @@ class VacationHomeManger implements IVacationHomeManager {
     lakeHouse: IVacationHome[];
     
     constructor() {
+
         this.beachHouses = []
         this.cityApartments = []
         this.farmBarn = []
@@ -22,5 +23,18 @@ class VacationHomeManger implements IVacationHomeManager {
 
     cancelBooking(name: string, startDate: Date, endDate: Date, type: PropertyType): boolean {
         throw new Error("Method not implemented.");
+    }
+
+    private populateBeachHouses() {
+
+    }
+    private populateCityApartments() {
+
+    }
+    private populateFarmBarns() {
+
+    }
+    private populateLakeHouses() {
+
     }
 }
