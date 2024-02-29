@@ -4,7 +4,7 @@ export interface IVacationHomeManager {
 
     beachHouses: IVacationHome[]
     cityApartments: IVacationHome[]
-    farmbarn: IVacationHome[]
+    farmBarn: IVacationHome[]
     lakeHouse: IVacationHome[]
 
     bookProperty(name: string, startDate: Date, endDate: Date): boolean
