@@ -4,4 +4,4 @@ export type Reservation = {
     endDate: Date
 }
 
-export type PropertyTypes = "FARM_HOUSE" | "BEACH_HOUSE" | "CITY_APARTMENT" | "FARM_BARN"
+export type PropertyType = "FARM_BARN" | "BEACH_HOUSE" | "CITY_APARTMENT" | "LAKE_HOUSE"

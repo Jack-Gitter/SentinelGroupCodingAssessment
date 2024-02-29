@@ -12,7 +12,7 @@ export interface IVacationHomeManager {
     farmBarns: FarmBarn[]
     lakeHouses: LakeHouse[]
 
-    bookProperty(name: string, startDate: Date, endDate: Date, type: PropertyType): boolean
+    bookProperty(name: string, startDate: Date, endDate: Date, type: PropertyType): boolean | Error
     cancelBooking(name: string, startDate: Date, endDate: Date, type: PropertyType): boolean
 
 }

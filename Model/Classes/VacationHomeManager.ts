@@ -1,3 +1,4 @@
+import { IVacationHome } from "../Interfaces/IVacationHome";
 import { IVacationHomeManager } from "../Interfaces/IVacationHomeManager";
 import { PropertyType } from "../Types";
 import { BeachHouse } from "./BeachHouse";
@@ -21,6 +22,26 @@ export class VacationHomeManger implements IVacationHomeManager {
     }
 
     bookProperty(name: string, startDate: Date, endDate: Date, type: PropertyType): boolean {
+        if (type === 'BEACH_HOUSE') {
+            
+            return true
+        } 
+
+        if (type === 'CITY_APARTMENT') {
+
+            return true
+        }
+
+        if (type === 'FARM_BARN') {
+
+            return true
+        }
+
+        if (type === 'LAKE_HOUSE') {
+
+            return true
+        }
+
         throw new Error("Method not implemented.");
     }
 
@@ -46,6 +67,22 @@ export class VacationHomeManger implements IVacationHomeManager {
             this.lakeHouses.push(new LakeHouse())
         }
 
+    }
+
+    private findAvaliableProperty(startDate: Date, endDate: Date, type: PropertyType): IVacationHome | Error {
+        if (type === 'BEACH_HOUSE') {
+
+        }
+        if (type === 'CITY_APARTMENT') {
+
+        }
+        if (type === 'FARM_BARN') {
+
+        }
+        if (type === 'LAKE_HOUSE') {
+
+        }
+        throw new Error("hi")
     }
 
 }
