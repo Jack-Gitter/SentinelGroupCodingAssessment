@@ -1,5 +1,6 @@
 import { IVacationHome } from "../Interfaces/IVacationHome";
 import { IVacationHomeManager } from "../Interfaces/IVacationHomeManager";
+import { PropertyType } from "../Types";
 
 class VacationHomeManger implements IVacationHomeManager {
 
@@ -15,11 +16,11 @@ class VacationHomeManger implements IVacationHomeManager {
         this.lakeHouse = []
     }
 
-    bookProperty(name: string, startDate: Date, endDate: Date): boolean {
+    bookProperty(name: string, startDate: Date, endDate: Date, type: PropertyType): boolean {
         throw new Error("Method not implemented.");
     }
 
-    cancelBooking(name: string, startDate: Date, endDate: Date): boolean {
+    cancelBooking(name: string, startDate: Date, endDate: Date, type: PropertyType): boolean {
         throw new Error("Method not implemented.");
     }
 }
