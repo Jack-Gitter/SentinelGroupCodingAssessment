@@ -9,11 +9,11 @@ export class VacationHome implements IVacationHome {
         this.reservations = []
     }
 
-    setBooking(name: string, startDate: Date, endDate: Date): boolean {
-        throw new Error("Method not implemented.");
+    setBooking(name: string, startDate: Date, endDate: Date): void {
+        this.reservations.push({name, startDate, endDate} as Reservation)
     }
 
-    cancelBooking(name: string, startDate: Date, endDate: Date): boolean {
+    cancelBooking(name: string, startDate: Date, endDate: Date): void {
         throw new Error("Method not implemented.");
     }
 

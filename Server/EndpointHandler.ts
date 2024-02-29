@@ -23,8 +23,6 @@ export default class EndpointHandler {
 
         this.app.post('/reservations', (req, res) => {
 
-            console.log(req.body)
-
             if (!req.body.name) {
                 res.status(400).send("You have not provided a valid name")
                 return
@@ -52,14 +50,16 @@ export default class EndpointHandler {
                 return
             }
 
-            let resp = this.vacationHomeManger.bookProperty(name, startDate, endDate, propertyType)
-
-            if (resp instanceof Error) {
-                res.status(400).send(resp.message)
+            try {
+                this.vacationHomeManger.bookProperty(name, startDate, endDate, propertyType)
+                res.send('success')
+                console.log(this.vacationHomeManger.beachHouses[0])
+                return
+            } catch (e : any) {
+                res.status(400).send(e.message)
                 return
             }
 
-            res.send('reservation successful')
         })
     }
 }

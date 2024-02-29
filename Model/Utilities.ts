@@ -9,9 +9,14 @@ export function isDateValid(dateString: string): boolean {
 }
 
 export function isPropertyTypeValid(propertyType: string) : boolean {
-    console.log(propertyType)
     return propertyType === "FARM_BARN" || 
     propertyType ===  "BEACH_HOUSE" ||
     propertyType === "CITY_APARTMENT" || 
     propertyType ==="LAKE_HOUSE"
+}
+
+export function doDatesOverlap(startDate1: Date, startDate2: Date, endDate1: Date, endDate2: Date) {
+        return (startDate1 <= startDate2 &&  startDate2 <= endDate1) ||  
+        (startDate1 <= endDate2   && endDate2 <= endDate1) ||
+        (startDate2 <  startDate1 && endDate1 < endDate2)
 }
