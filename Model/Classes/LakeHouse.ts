@@ -1,6 +1,6 @@
 import { VacationHome } from "./VacationHome";
 
-class LakeHouse extends VacationHome {
+export class LakeHouse extends VacationHome {
 
     constructor() {
         super()

@@ -3,12 +3,8 @@ import { VacationHome } from "./VacationHome";
 
 export class BeachHouse extends VacationHome {
 
-
     constructor() {
         super()
     }
-
-
-    
 
 }

@@ -1,6 +1,7 @@
 import { Express } from "express";
 import { IVacationHomeManager } from "../Model/Interfaces/IVacationHomeManager";
 import { VacationHomeManger } from "../Model/Classes/VacationHomeManager";
+import { BEACH_HOUSE_AMNT, CITY_APARTMENT_AMNT, FARM_BARN_AMNT, LAKE_HOUSE_AMNT } from "../Model/Contants";
 
 export default class EndpointHandler {
 
@@ -9,7 +10,7 @@ export default class EndpointHandler {
 
     constructor(app: Express) {
         this.app = app
-        this.vacationHomeManger = new VacationHomeManger()
+        this.vacationHomeManger = new VacationHomeManger(BEACH_HOUSE_AMNT, CITY_APARTMENT_AMNT, FARM_BARN_AMNT, LAKE_HOUSE_AMNT)
     }
 
     setRoutes() {
