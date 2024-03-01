@@ -72,48 +72,45 @@ export class VacationHomeManger implements IVacationHomeManager {
 
     }
 
-    private findAvaliableProperty(startDate: Date, endDate: Date, type: PropertyType): IVacationHome {
-        if (type === 'BEACH_HOUSE') {
-
-            for (let i = 0; i < this.beachHouses.length; i++) {
-
-                // if the beachouse does not have any current reservations, we can reserve any time
-                if (this.beachHouses[i].reservations.length === 0) {
-                    return this.beachHouses[i]
+    private checkAvailibility(vacationHomes: IVacationHome[], startDate: Date, endDate: Date): IVacationHome {
+            for (let i = 0; i < vacationHomes.length; i++) {
+                if (vacationHomes[i].reservations.length === 0) {
+                    return vacationHomes[i]
                 }
 
-                let isValidHouse = true
-
-                // if it does have reservations, try to fit in the current request if possible
-                for (let j = 0; j < this.beachHouses[i].reservations.length; j++) {
-                    let startDate2 = this.beachHouses[i].reservations[j].startDate
-                    let endDate2 = this.beachHouses[i].reservations[j].endDate
+                let isValidVacationHome = true
+                for (let j = 0; j < vacationHomes[i].reservations.length; j++) {
+                    let startDate2 = vacationHomes[i].reservations[j].startDate
+                    let endDate2 = vacationHomes[i].reservations[j].endDate
                     if (doDatesOverlap(startDate, startDate2, endDate, endDate2)) {
-                        isValidHouse = false
+                        isValidVacationHome = false
                         break
                     }
                 }
-
-                if (isValidHouse) {
-                    return this.beachHouses[i]
+                if (isValidVacationHome) {
+                    return vacationHomes[i]
                 }
-
             }
-
             throw new Error("no available Beach Houses for the requested time slot")
-
+    }
+    private findAvaliableProperty(startDate: Date, endDate: Date, type: PropertyType): IVacationHome {
+        if (type === 'BEACH_HOUSE') {
+            return this.checkAvailibility(this.beachHouses, startDate, endDate)
         }
 
         if (type === 'CITY_APARTMENT') {
-
+            return this.checkAvailibility(this.cityApartments, startDate, endDate)
         }
+
         if (type === 'FARM_BARN') {
-
+            return this.checkAvailibility(this.farmBarns, startDate, endDate)
         }
+
         if (type === 'LAKE_HOUSE') {
-
+            return this.checkAvailibility(this.lakeHouses, startDate, endDate)
         }
-        throw new Error("hi")
+
+        throw new Error("could not find available property")
     }
 
 }
