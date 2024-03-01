@@ -1,5 +1,4 @@
 import axios from "axios";
-import { ReservationResponse } from "../../Model/Types";
 /*
 export type FailureReason =                                      "Invalid name" |
                                                            "Invalid start date" |
@@ -78,11 +77,11 @@ describe('testing the reservations endpoint', () => {
     })
 
     it('creates a beach house properly', async () => {
-        let resp = await instance.post('/reservations', {name: "Jack Gitter", propertyType: "BEACH_HOUSE", startDate: "2026-02-01", endDate: "2029-03-01"})
+        let resp = await instance.post('/reservations', {name: "Jack Gitter", propertyType: "BEACH_HOUSE", startDate: "2027-02-01", endDate: "2029-03-01"})
         expect(resp.data).toEqual({
             bookingSuccessful: true,
             name: "Jack Gitter",
-            startDate: "2026-02-01T00:00:00.000Z",
+            startDate: "2027-02-01T00:00:00.000Z",
             endDate: "2029-03-01T00:00:00.000Z",
         })
 
