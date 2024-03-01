@@ -6,6 +6,7 @@ import { isPropertyTypeValid } from "../Model/Utilities";
 import { isDateValid } from "../Model/Utilities";
 import { FailureReason, ReservationResponse } from "../Model/Types";
 import { ReservationError } from "../Model/Classes/ReservationError";
+import { start } from "repl";
 
 export default class EndpointHandler {
 
@@ -59,7 +60,11 @@ export default class EndpointHandler {
 
             try {
                 this.vacationHomeManger.bookProperty(name, startDate, endDate, propertyType)
-                res.send('success')
+                res.json({bookingSuccessful: true,
+                            name: name, 
+                            startDate: startDate, 
+                            endDate: endDate
+                        } as ReservationResponse)
                 console.log(this.vacationHomeManger.beachHouses)
                 console.log(this.vacationHomeManger.cityApartments)
                 console.log(this.vacationHomeManger.farmBarns)

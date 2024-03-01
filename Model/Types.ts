@@ -8,7 +8,7 @@ export type PropertyType = "FARM_BARN" | "BEACH_HOUSE" | "CITY_APARTMENT" | "LAK
 
 export type ReservationResponse = {
     bookingSuccessful: boolean
-    reasonForFailure: FailureReason | null
+    reasonForFailure?: FailureReason 
     name: string
     startDate: Date
     endDate: Date
