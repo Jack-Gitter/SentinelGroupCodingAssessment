@@ -7,6 +7,9 @@ import { isDateValid } from "../Model/Utilities";
 import { FailureReason, ReservationResponse } from "../Model/Types";
 import { ReservationError } from "../Model/Classes/ReservationError";
 
+/**
+ * Class to handle API endpoints
+ */
 export default class EndpointHandler {
 
     app: Express
@@ -18,6 +21,9 @@ export default class EndpointHandler {
     }
 
 
+    /**
+     * Where the routes for the HTTP server are set 
+     */
     setRoutes() {
 
         this.app.post('/reservations', (req, res) => {
