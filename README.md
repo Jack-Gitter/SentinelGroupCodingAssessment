@@ -46,7 +46,7 @@ After this, please switch the request type to POST, and navigate to the body tab
 If the server is running, you are now ready to make requests! Requests require the following body fields formatted in JSON: 
 
 <code>{
-  Name: string
+  name: string
   propertyType: PropertyType (can be found in the Model/Types.ts file)
   startDate: string
   endDate: string
