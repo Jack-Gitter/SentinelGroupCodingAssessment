@@ -24,28 +24,28 @@ export class VacationHomeManger implements IVacationHomeManager {
         this.populateVacationHomes(beachHouseAmnt, cityApartmentAmnt, farmBarnAmnt, lakeHouseAmnt)
     }
 
-    bookProperty(name: string, startDate: Date, endDate: Date, type: PropertyType): boolean {
+    reserveProperty(name: string, startDate: Date, endDate: Date, type: PropertyType): boolean {
         if (type === 'BEACH_HOUSE') {
             let availableBeachHouse = this.findAvaliableProperty(startDate, endDate, type) as BeachHouse
-            availableBeachHouse.setBooking(name, startDate, endDate)
+            availableBeachHouse.setReservation(name, startDate, endDate)
             return true
         } 
 
         if (type === 'CITY_APARTMENT') {
             let availableCityApartment = this.findAvaliableProperty(startDate, endDate, type) as CityApartment
-            availableCityApartment.setBooking(name, startDate, endDate)
+            availableCityApartment.setReservation(name, startDate, endDate)
             return true
         }
 
         if (type === 'FARM_BARN') {
             let availableFarmBarn = this.findAvaliableProperty(startDate, endDate, type) as FarmBarn
-            availableFarmBarn.setBooking(name, startDate, endDate)
+            availableFarmBarn.setReservation(name, startDate, endDate)
             return true
         }
 
         if (type === 'LAKE_HOUSE') {
             let availableLakeHouse = this.findAvaliableProperty(startDate, endDate, type) as LakeHouse
-            availableLakeHouse.setBooking(name, startDate, endDate)
+            availableLakeHouse.setReservation(name, startDate, endDate)
             return true
         }
         throw new ReservationError('Vacation Home does not have a booking available for your requested dates');

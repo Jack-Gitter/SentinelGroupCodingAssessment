@@ -1,4 +1,4 @@
-import express, { Express } from "express";
+import { Express } from "express";
 import { IVacationHomeManager } from "../Model/Interfaces/IVacationHomeManager";
 import { VacationHomeManger } from "../Model/Classes/VacationHomeManager";
 import { BEACH_HOUSE_AMNT, CITY_APARTMENT_AMNT, FARM_BARN_AMNT, LAKE_HOUSE_AMNT } from "../Model/Contants";
@@ -6,7 +6,6 @@ import { isPropertyTypeValid } from "../Model/Utilities";
 import { isDateValid } from "../Model/Utilities";
 import { FailureReason, ReservationResponse } from "../Model/Types";
 import { ReservationError } from "../Model/Classes/ReservationError";
-import { start } from "repl";
 
 export default class EndpointHandler {
 
@@ -20,10 +19,6 @@ export default class EndpointHandler {
 
 
     setRoutes() {
-
-        this.app.get('/', (req, res) => {
-            res.send("valid")
-        })
 
         this.app.post('/reservations', (req, res) => {
 
@@ -60,7 +55,7 @@ export default class EndpointHandler {
             }
 
             try {
-                this.vacationHomeManger.bookProperty(name, startDate, endDate, propertyType)
+                this.vacationHomeManger.reserveProperty(name, startDate, endDate, propertyType)
                 res.json({bookingSuccessful: true,
                             name: name, 
                             startDate: startDate, 

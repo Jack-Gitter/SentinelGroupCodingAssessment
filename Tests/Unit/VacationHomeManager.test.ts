@@ -17,7 +17,7 @@ describe('Testing the VacationHomeManager class functionality', () => {
     })
 
     it('books a beach house properly', () => {
-        let res = vacationHomeManager.bookProperty("Jack Gitter", startDate, endDate, "BEACH_HOUSE")
+        let res = vacationHomeManager.reserveProperty("Jack Gitter", startDate, endDate, "BEACH_HOUSE")
         expect(res).toBe(true)
 
         expect(vacationHomeManager.beachHouses[0].reservations).toHaveLength(1)
@@ -36,7 +36,7 @@ describe('Testing the VacationHomeManager class functionality', () => {
         }
     })
     it('books a lake house properly', () => {
-        let res = vacationHomeManager.bookProperty("Jack Gitter", startDate, endDate, "LAKE_HOUSE")
+        let res = vacationHomeManager.reserveProperty("Jack Gitter", startDate, endDate, "LAKE_HOUSE")
         expect(res).toBe(true)
 
         expect(vacationHomeManager.lakeHouses[0].reservations).toHaveLength(1)
@@ -55,7 +55,7 @@ describe('Testing the VacationHomeManager class functionality', () => {
         }
     })
     it('books a farm barn house properly', () => {
-        let res = vacationHomeManager.bookProperty("Jack Gitter", startDate, endDate, "FARM_BARN")
+        let res = vacationHomeManager.reserveProperty("Jack Gitter", startDate, endDate, "FARM_BARN")
         expect(res).toBe(true)
 
         expect(vacationHomeManager.farmBarns[0].reservations).toHaveLength(1)
@@ -74,7 +74,7 @@ describe('Testing the VacationHomeManager class functionality', () => {
         }
     })
     it('books a city apartment house properly', () => {
-        let res = vacationHomeManager.bookProperty("Jack Gitter", startDate, endDate, "CITY_APARTMENT")
+        let res = vacationHomeManager.reserveProperty("Jack Gitter", startDate, endDate, "CITY_APARTMENT")
         expect(res).toBe(true)
 
         expect(vacationHomeManager.cityApartments[0].reservations).toHaveLength(1)
@@ -95,8 +95,8 @@ describe('Testing the VacationHomeManager class functionality', () => {
 
     it('throws an error if there is a reservation conflict', () => {
         vacationHomeManager = new VacationHomeManger(1, CITY_APARTMENT_AMNT, FARM_BARN_AMNT, LAKE_HOUSE_AMNT)
-        vacationHomeManager.bookProperty("Jack Gitter", startDate, endDate, "BEACH_HOUSE")
-        expect(() => vacationHomeManager.bookProperty("Jack Gitter", startDate, endDate, "BEACH_HOUSE")).toThrow()
+        vacationHomeManager.reserveProperty("Jack Gitter", startDate, endDate, "BEACH_HOUSE")
+        expect(() => vacationHomeManager.reserveProperty("Jack Gitter", startDate, endDate, "BEACH_HOUSE")).toThrow()
     })
 
 })

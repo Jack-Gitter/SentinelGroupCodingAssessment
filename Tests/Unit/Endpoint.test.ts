@@ -1,13 +1,4 @@
 import axios from "axios";
-/*
-export type FailureReason =                                      "Invalid name" |
-                                                           "Invalid start date" |
-                                                             "Invalid end date" |
-                                          "Start date cannot be after end date" |
-                                                        "Invalid property type" |
-     "Vacation Home does not have a booking available for your requested dates" 
-
-*/
 describe('testing the reservations endpoint', () => {
     let instance = axios.create({
         baseURL: "http://localhost:8080",

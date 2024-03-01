@@ -9,7 +9,7 @@ export class VacationHome implements IVacationHome {
         this.reservations = []
     }
 
-    setBooking(name: string, startDate: Date, endDate: Date): void {
+    setReservation(name: string, startDate: Date, endDate: Date): void {
         this.reservations.push({name, startDate, endDate} as Reservation)
     }
 
