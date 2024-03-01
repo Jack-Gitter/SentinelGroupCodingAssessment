@@ -73,11 +73,17 @@ export class VacationHomeManger implements IVacationHomeManager {
 
     private checkAvailibility(vacationHomes: IVacationHome[], startDate: Date, endDate: Date): IVacationHome {
             for (let i = 0; i < vacationHomes.length; i++) {
+
+                // if we have a vacation home that has no reservations, return this one
                 if (vacationHomes[i].reservations.length === 0) {
                     return vacationHomes[i]
                 }
 
                 let isValidVacationHome = true
+
+                /*
+                search through the homes, and see if any have openings for the requested time
+                */
                 for (let j = 0; j < vacationHomes[i].reservations.length; j++) {
                     let startDate2 = vacationHomes[i].reservations[j].startDate
                     let endDate2 = vacationHomes[i].reservations[j].endDate
@@ -86,6 +92,8 @@ export class VacationHomeManger implements IVacationHomeManager {
                         break
                     }
                 }
+
+                // if there is an opening, return this home
                 if (isValidVacationHome) {
                     return vacationHomes[i]
                 }
