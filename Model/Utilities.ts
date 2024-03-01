@@ -3,8 +3,9 @@ import { PropertyType } from "./Types"
 export function isDateValid(dateString: string): boolean {
 
     let date = new Date(dateString)
+    let currentDate = new Date()
     // also need to check if the date is past today's date !!!
-    return date instanceof Date && !isNaN(date.getTime())
+    return (date instanceof Date && !isNaN(date.getTime())) && date >= currentDate
 
 }
 
