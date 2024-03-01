@@ -18,6 +18,7 @@ export default class EndpointHandler {
         this.vacationHomeManger = new VacationHomeManger(BEACH_HOUSE_AMNT, CITY_APARTMENT_AMNT, FARM_BARN_AMNT, LAKE_HOUSE_AMNT)
     }
 
+
     setRoutes() {
 
         this.app.get('/', (req, res) => {
@@ -65,10 +66,6 @@ export default class EndpointHandler {
                             startDate: startDate, 
                             endDate: endDate
                         } as ReservationResponse)
-                console.log(this.vacationHomeManger.beachHouses)
-                console.log(this.vacationHomeManger.cityApartments)
-                console.log(this.vacationHomeManger.farmBarns)
-                console.log(this.vacationHomeManger.lakeHouses)
                 return
             } catch (e : unknown) {
                 if (e instanceof ReservationError) {
