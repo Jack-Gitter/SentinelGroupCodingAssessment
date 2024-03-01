@@ -7,6 +7,7 @@ import { CityApartment } from "./CityApartment";
 import { FarmBarn } from "./FarmBarn";
 import { LakeHouse } from "./LakeHouse";
 import { doDatesOverlap } from "../Utilities";
+import { ReservationError } from "./ReservationError";
 
 export class VacationHomeManger implements IVacationHomeManager {
 
@@ -31,25 +32,23 @@ export class VacationHomeManger implements IVacationHomeManager {
         } 
 
         if (type === 'CITY_APARTMENT') {
-
+            let availableCityApartment = this.findAvaliableProperty(startDate, endDate, type) as CityApartment
+            availableCityApartment.setBooking(name, startDate, endDate)
             return true
         }
 
         if (type === 'FARM_BARN') {
-
+            let availableFarmBarn = this.findAvaliableProperty(startDate, endDate, type) as FarmBarn
+            availableFarmBarn.setBooking(name, startDate, endDate)
             return true
         }
 
         if (type === 'LAKE_HOUSE') {
-
+            let availableLakeHouse = this.findAvaliableProperty(startDate, endDate, type) as LakeHouse
+            availableLakeHouse.setBooking(name, startDate, endDate)
             return true
         }
-
-        throw new Error("Method not implemented.");
-    }
-
-    cancelBooking(name: string, startDate: Date, endDate: Date, type: PropertyType): boolean {
-        throw new Error("Method not implemented.");
+        throw new ReservationError('Vacation Home does not have a booking available for your requested dates');
     }
 
     private populateVacationHomes(beachHouseAmnt: number, cityApartmentAmnt: number, farmBarnAmnt: number, lakeHouseAmnt: number) {
@@ -91,9 +90,10 @@ export class VacationHomeManger implements IVacationHomeManager {
                     return vacationHomes[i]
                 }
             }
-            throw new Error("no available Beach Houses for the requested time slot")
+            throw new ReservationError('Vacation Home does not have a booking available for your requested dates')
     }
     private findAvaliableProperty(startDate: Date, endDate: Date, type: PropertyType): IVacationHome {
+
         if (type === 'BEACH_HOUSE') {
             return this.checkAvailibility(this.beachHouses, startDate, endDate)
         }
@@ -110,7 +110,7 @@ export class VacationHomeManger implements IVacationHomeManager {
             return this.checkAvailibility(this.lakeHouses, startDate, endDate)
         }
 
-        throw new Error("could not find available property")
+        throw new ReservationError('Vacation Home does not have a booking available for your requested dates')
     }
 
 }

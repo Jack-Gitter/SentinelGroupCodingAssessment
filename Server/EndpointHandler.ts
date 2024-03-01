@@ -4,6 +4,8 @@ import { VacationHomeManger } from "../Model/Classes/VacationHomeManager";
 import { BEACH_HOUSE_AMNT, CITY_APARTMENT_AMNT, FARM_BARN_AMNT, LAKE_HOUSE_AMNT } from "../Model/Contants";
 import { isPropertyTypeValid } from "../Model/Utilities";
 import { isDateValid } from "../Model/Utilities";
+import { FailureReason, ReservationResponse } from "../Model/Types";
+import { ReservationError } from "../Model/Classes/ReservationError";
 
 export default class EndpointHandler {
 
@@ -23,21 +25,16 @@ export default class EndpointHandler {
 
         this.app.post('/reservations', (req, res) => {
 
+            let failureReason: FailureReason | null = null
+
             if (!req.body.name) {
-                res.status(400).send("You have not provided a valid name")
-                return
-            }
-            if (!req.body.propertyType || !isPropertyTypeValid(req.body.propertyType)) {
-                res.status(400).send("You have not provided a valid property type")
-                return
-            }
-            if (!req.body.startDate || !isDateValid(req.body.startDate)) {
-                res.status(400).send("You have not provided a valid start date")
-                return
-            }
-            if (!req.body.endDate || !isDateValid(req.body.endDate)) {
-                res.status(400).send("You have not provided a valid end date")
-                return
+                failureReason = 'Invalid name'
+            } else if (!req.body.propertyType || !isPropertyTypeValid(req.body.propertyType)) {
+                failureReason = 'Invalid property type'
+            } else if (!req.body.startDate || !isDateValid(req.body.startDate)) {
+                failureReason = 'Invalid start date'
+            } else if (!req.body.endDate || !isDateValid(req.body.endDate)) {
+                failureReason = 'Invalid end date'
             }
             
             let name = req.body.name
@@ -46,17 +43,39 @@ export default class EndpointHandler {
             let endDate = new Date(req.body.endDate)
 
             if (endDate < startDate) {
-                res.status(400).send("End date cannot be before start date")
+                failureReason = 'Start date cannot be after end date'
+            }
+
+            if (failureReason) {
+                res.status(400).json({
+                    bookingSuccessful: false,
+                    reasonForFailure: failureReason, 
+                    name: name, 
+                    startDate: startDate, 
+                    endDate: endDate
+                } as ReservationResponse)
                 return
             }
 
             try {
                 this.vacationHomeManger.bookProperty(name, startDate, endDate, propertyType)
                 res.send('success')
-                console.log(this.vacationHomeManger.beachHouses[0])
+                console.log(this.vacationHomeManger.beachHouses)
+                console.log(this.vacationHomeManger.cityApartments)
+                console.log(this.vacationHomeManger.farmBarns)
+                console.log(this.vacationHomeManger.lakeHouses)
                 return
-            } catch (e : any) {
-                res.status(400).send(e.message)
+            } catch (e : unknown) {
+                if (e instanceof ReservationError) {
+                    failureReason = e.failureReason()
+                    res.status(400).json({
+                        bookingSuccessful: false,
+                        reasonForFailure: failureReason, 
+                        name: name, 
+                        startDate: startDate, 
+                        endDate: endDate
+                    } as ReservationResponse)
+                }
                 return
             }
 

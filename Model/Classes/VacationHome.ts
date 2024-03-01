@@ -13,13 +13,4 @@ export class VacationHome implements IVacationHome {
         this.reservations.push({name, startDate, endDate} as Reservation)
     }
 
-    cancelBooking(name: string, startDate: Date, endDate: Date): void {
-        throw new Error("Method not implemented.");
-    }
-
-    protected validateBooking(startDate: Date, endDate: Date): boolean {
-        return false
-
-    }
-
 }

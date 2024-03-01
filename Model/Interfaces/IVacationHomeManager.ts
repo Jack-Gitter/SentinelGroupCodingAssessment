@@ -13,6 +13,5 @@ export interface IVacationHomeManager {
     lakeHouses: LakeHouse[]
 
     bookProperty(name: string, startDate: Date, endDate: Date, type: PropertyType): boolean | Error
-    cancelBooking(name: string, startDate: Date, endDate: Date, type: PropertyType): boolean
 
 }
